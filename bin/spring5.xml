@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-init-method="myInit" default-destroy-method="cleanUp">
+	<bean id="triangle" class="gupta.shanu.Triangle" init-method="myInit" destroy-method="cleanUp">
+		<property name="pointA" ref="zeroPoint" />
+		<property name="pointB">
+			<bean class="gupta.shanu.Point">
+				<property name="x" value="1" />
+				<property name="y" value="1" />
+			</bean>		
+		</property>
+		<property name="pointC">
+			<bean class="gupta.shanu.Point">
+				<property name="x" value="3" />
+				<property name="y" value="0" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="zeroPoint" class="gupta.shanu.Point">
+		<property name="x" value="${pointA.X}" />
+		<property name="y" value="${pointA.Y}" />
+	</bean>
+
+	<alias name="triangle" alias="triangle-alias" />
+	
+	<bean class="gupta.shanu.MyBeanFactoryPostProcessor" />
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="pointsConfig.properties" />
+	</bean>
+</beans>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="parentTriangle" class="gupta.shanu.Triangle2" abstract="true">
+		<property name="points">
+			<list>
+				<ref bean="zeroPoint" />
+			</list>
+		</property>
+	</bean>
+	<bean id="triangle" class="gupta.shanu.Triangle2" parent="parentTriangle">
+		<property name="points">
+			<list merge="true">
+				<ref bean="point2" />
+				<ref bean="point3" />
+			</list>
+		</property>
+	</bean>
+	<bean id="zeroPoint" class="gupta.shanu.Point">
+		<property name="x" value="0" />
+		<property name="y" value="0" />
+	</bean>
+	<bean id="point2" class="gupta.shanu.Point">
+		<property name="x" value="1" />
+		<property name="y" value="1" />
+	</bean>		
+	<bean id="point3" class="gupta.shanu.Point">
+		<property name="x" value="3" />
+		<property name="y" value="0" />
+	</bean>
+
+	<alias name="triangle" alias="triangle-alias" />
+</beans>
